@@ -8,7 +8,7 @@ from langchain_core.callbacks import (
     CallbackManagerForToolRun,
 )
 from langchain_core.tools import BaseTool
-from pydantic import ConfigDict, BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from langchain_community.utilities.oxylabs_search import OxylabsSearchAPIWrapper
 
