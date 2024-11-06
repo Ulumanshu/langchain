@@ -1,7 +1,7 @@
 """Tool for the Oxylabs Search API."""
 
 import json
-from typing import Optional, Type
+from typing import Optional, Type, Any
 
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
@@ -44,7 +44,7 @@ class OxylabsSearchRun(BaseTool):
         extra="allow",
     )
 
-    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs) -> None:
+    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs: Any) -> None:
         super().__init__()
         self.wrapper = wrapper
         self.kwargs = kwargs
@@ -105,7 +105,7 @@ class OxylabsSearchResults(BaseTool):
         extra="allow",
     )
 
-    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs) -> None:
+    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs: Any) -> None:
         super().__init__()
         self.wrapper = wrapper
         self.kwargs = kwargs
