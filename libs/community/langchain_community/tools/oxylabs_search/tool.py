@@ -81,7 +81,6 @@ class OxylabsSearchResults(BaseTool):
     )
     args_schema: type[BaseModel] = OxylabsSearchQueryInput
 
-
     def _run(
         self,
         query: str,
