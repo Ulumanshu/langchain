@@ -1,7 +1,7 @@
 """Tool for the Oxylabs Search API."""
 
 import json
-from typing import Any, Optional, Type
+from typing import Optional, Type
 
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
@@ -37,17 +37,10 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    wrapper: OxylabsSearchAPIWrapper = Field(..., exclude=True)
-    kwargs: dict = Field(default_factory=dict, exclude=True)
     args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
     model_config = ConfigDict(
         extra="allow",
     )
-
-    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs: Any) -> None:
-        super().__init__()
-        self.wrapper = wrapper
-        self.kwargs = kwargs
 
     def _run(
         self,
@@ -57,14 +50,10 @@ class OxylabsSearchRun(BaseTool):
     ) -> str:
         """Use the tool."""
 
-        kwargs_ = dict(**self.kwargs)
-        kwargs_.update(
-            {
-                "geo_location": geo_location,
-            }
-        )
+        kwargs_ = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper()
 
-        return self.wrapper.run(query, **kwargs_)
+        return wrapper_.run(query, **kwargs_)
 
     async def _arun(
         self,
@@ -74,14 +63,10 @@ class OxylabsSearchRun(BaseTool):
     ) -> str:
         """Use the tool asynchronously."""
 
-        kwargs_ = dict(**self.kwargs)
-        kwargs_.update(
-            {
-                "geo_location": geo_location,
-            }
-        )
+        kwargs_ = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper()
 
-        return await self.wrapper.arun(query, **kwargs_)
+        return await wrapper_.arun(query, **kwargs_)
 
 
 class OxylabsSearchResults(BaseTool):
@@ -97,18 +82,11 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
-    wrapper: OxylabsSearchAPIWrapper = Field(..., exclude=True)
-    kwargs: dict = Field(default_factory=dict, exclude=True)
     args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
 
     model_config = ConfigDict(
         extra="allow",
     )
-
-    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs: Any) -> None:
-        super().__init__()
-        self.wrapper = wrapper
-        self.kwargs = kwargs
 
     def _run(
         self,
@@ -118,14 +96,10 @@ class OxylabsSearchResults(BaseTool):
     ) -> str:
         """Use the tool."""
 
-        kwargs_ = dict(**self.kwargs)
-        kwargs_.update(
-            {
-                "geo_location": geo_location,
-            }
-        )
+        kwargs_= {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper()
 
-        return json.dumps(self.wrapper.results(query, **kwargs_))
+        return json.dumps(wrapper_.results(query, **kwargs_))
 
     async def _arun(
         self,
@@ -135,11 +109,7 @@ class OxylabsSearchResults(BaseTool):
     ) -> str:
         """Use the tool asynchronously."""
 
-        kwargs_ = dict(**self.kwargs)
-        kwargs_.update(
-            {
-                "geo_location": geo_location,
-            }
-        )
+        kwargs_ = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper()
 
-        return json.dumps(await self.wrapper.aresults(query, **kwargs_))
+        return json.dumps(await wrapper_.aresults(query, **kwargs_))
