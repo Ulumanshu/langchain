@@ -1,14 +1,14 @@
 """Tool for the Oxylabs Search API."""
 
 import json
-from typing import Any, Dict, Optional, Set, Type
+from typing import Optional, Type
 
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
     CallbackManagerForToolRun,
 )
 from langchain_core.tools import BaseTool
-from pydantic import BaseModel, Field
+from pydantic import ConfigDict, BaseModel, Field
 
 from langchain_community.utilities.oxylabs_search import OxylabsSearchAPIWrapper
 
@@ -38,18 +38,7 @@ class OxylabsSearchRun(BaseTool):
         "The output is a compiled, formatted summary of query results. "
     )
     args_schema: Type[BaseModel] = OxylabsSearchQueryInput
-    return_direct: bool = False
-
-    def __replace__(
-        self,
-        *,
-        __pydantic_extra__: Optional[Dict[str, Any]] = None,
-        __pydantic_fields_set__: Optional[Set[str]] = None,
-        __pydantic_private__: Optional[Dict[str, Any]] = None,
-        name: str = "",
-        **kwargs: Any,
-    ) -> "OxylabsSearchRun":  # type: ignore[override]
-        return self
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def _run(
         self,
@@ -92,18 +81,7 @@ class OxylabsSearchResults(BaseTool):
         "The output is a JSON array of response page objects. "
     )
     args_schema: Type[BaseModel] = OxylabsSearchQueryInput
-    return_direct: bool = False
-
-    def __replace__(
-        self,
-        *,
-        __pydantic_extra__: Optional[Dict[str, Any]] = None,
-        __pydantic_fields_set__: Optional[Set[str]] = None,
-        __pydantic_private__: Optional[Dict[str, Any]] = None,
-        name: str = "",
-        **kwargs: Any,
-    ) -> "OxylabsSearchResults":  # type: ignore[override]
-        return self
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def _run(
         self,
