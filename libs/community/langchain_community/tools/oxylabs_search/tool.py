@@ -37,9 +37,12 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    wrapper: OxylabsSearchAPIWrapper
-    kwargs: dict = Field(default_factory=dict)
-    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
+    wrapper: OxylabsSearchAPIWrapper = Field(..., exclude=True)
+    kwargs: dict = Field(default_factory=dict, exclude=True)
+    args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
+    model_config = ConfigDict(
+        extra="allow",
+    )
 
     def _run(
         self,
@@ -89,9 +92,9 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
-    wrapper: OxylabsSearchAPIWrapper
-    kwargs: dict = Field(default_factory=dict)
-    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
+    wrapper: OxylabsSearchAPIWrapper = Field(..., exclude=True)
+    kwargs: dict = Field(default_factory=dict, exclude=True)
+    args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
 
     model_config = ConfigDict(
         extra="allow",
