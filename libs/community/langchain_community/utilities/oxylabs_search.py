@@ -236,23 +236,23 @@ class OxylabsSearchAPIWrapper(BaseModel):
 
         return validated_categories
 
-    async def arun(self, query: str, **kwargs: Any) -> str:
+    async def arun(self, query) -> str:
         """
         Run query through OxylabsSearchAPI and parse result async.
         """
-        return self._process_response(await self.aresults(query, **kwargs), **kwargs)
+        return self._process_response(await self.aresults(query))
 
-    def run(self, query: str, **kwargs: Any) -> str:
+    def run(self, query: str) -> str:
         """
         Run query through OxylabsSearchAPI and parse result.
         """
-        return self._process_response(self.results(query, **kwargs), **kwargs)
+        return self._process_response(self.results(query))
 
-    def results(self, query: str, **kwargs: Any) -> List[Dict[str, Any]]:
+    def results(self, query: str) -> List[Dict[str, Any]]:
         """
         Run query through Oxylabs Web Scrapper API and return SERPResponse object.
         """
-        params_ = self.get_params(**kwargs)
+        params_ = self.get_params()
         search_client = self.search_engine
         search_result = search_client.scrape_search(query, **params_)
 
@@ -264,11 +264,11 @@ class OxylabsSearchAPIWrapper(BaseModel):
 
         return validated_responses
 
-    async def aresults(self, query: str, **kwargs: Any) -> List[Dict[str, Any]]:
+    async def aresults(self, query: str) -> List[Dict[str, Any]]:
         """
         Run query through Oxylabs Web Scrapper API and return SERPResponse object async.
         """
-        params_ = self.get_params(**kwargs)
+        params_ = self.get_params()
 
         search_client = self.search_engine
         search_result = await asyncio.to_thread(
@@ -335,7 +335,7 @@ class OxylabsSearchAPIWrapper(BaseModel):
         except (KeyError, IndexError, TypeError, ValueError) as exc:
             raise RuntimeError(f"Response Validation Error: {str(exc)}")
 
-    def _process_response(self, res: Any, **kwargs: Any) -> str:
+    def _process_response(self, res: Any) -> str:
         """
         Process Oxylabs SERPResponse and serialize search results to string.
         """
@@ -351,10 +351,7 @@ class OxylabsSearchAPIWrapper(BaseModel):
         }
 
         snippets: List[str] = list()
-        validated_categories = self.validate_response_categories(
-            kwargs.get("result_categories", [])
-        )
-        result_categories_ = validated_categories or self.result_categories or []
+        result_categories_ = self.result_categories or []
 
         for nr_, validated_response in enumerate(res):
             if result_categories_:

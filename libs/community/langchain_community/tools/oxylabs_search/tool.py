@@ -47,10 +47,9 @@ class OxylabsSearchRun(BaseTool):
     ) -> str:
         """Use the tool."""
 
-        kwargs_ = {"geo_location": geo_location}
         wrapper_ = OxylabsSearchAPIWrapper()
 
-        return wrapper_.run(query, **kwargs_)
+        return wrapper_.run(query)
 
     async def _arun(
         self,
@@ -60,10 +59,9 @@ class OxylabsSearchRun(BaseTool):
     ) -> str:
         """Use the tool asynchronously."""
 
-        kwargs_ = {"geo_location": geo_location}
         wrapper_ = OxylabsSearchAPIWrapper()
 
-        return await wrapper_.arun(query, **kwargs_)
+        return await wrapper_.arun(query)
 
 
 class OxylabsSearchResults(BaseTool):
@@ -89,10 +87,9 @@ class OxylabsSearchResults(BaseTool):
     ) -> str:
         """Use the tool."""
 
-        kwargs_ = {"geo_location": geo_location}
         wrapper_ = OxylabsSearchAPIWrapper()
 
-        return json.dumps(wrapper_.results(query, **kwargs_))
+        return json.dumps(wrapper_.results(query))
 
     async def _arun(
         self,
@@ -102,7 +99,6 @@ class OxylabsSearchResults(BaseTool):
     ) -> str:
         """Use the tool asynchronously."""
 
-        kwargs_ = {"geo_location": geo_location}
         wrapper_ = OxylabsSearchAPIWrapper()
 
-        return json.dumps(await wrapper_.aresults(query, **kwargs_))
+        return json.dumps(await wrapper_.aresults(query))
