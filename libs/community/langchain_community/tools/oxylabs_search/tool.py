@@ -37,7 +37,7 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    args_schema: Type[OxylabsSearchQueryInput] = OxylabsSearchQueryInput
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
 
     def _run(
         self,
@@ -79,7 +79,7 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
-    args_schema: Type[OxylabsSearchQueryInput] = OxylabsSearchQueryInput
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
 
     def _run(
         self,
