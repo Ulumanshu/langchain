@@ -1,7 +1,7 @@
 """Tool for the Oxylabs Search API."""
 
 import json
-from typing import Any, Optional, Type
+from typing import Any, Dict, Optional, Set, Type
 
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
@@ -37,10 +37,18 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
     return_direct: bool = False
 
-    def __replace__(self, *args: Any, **kwargs: Any) -> "OxylabsSearchRun":  # type: ignore[override]
+    def __replace__(
+        self,
+        *,
+        __pydantic_extra__: Optional[Dict[str, Any]] = None,
+        __pydantic_fields_set__: Optional[Set[str]] = None,
+        __pydantic_private__: Optional[Dict[str, Any]] = None,
+        name: str = "",
+        **kwargs: Any
+    ) -> "OxylabsSearchRun":  # type: ignore[override]
         return self
 
     def _run(
@@ -83,10 +91,18 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
-    args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
     return_direct: bool = False
 
-    def __replace__(self, *args: Any, **kwargs: Any) -> "OxylabsSearchResults":  # type: ignore[override]
+    def __replace__(
+        self,
+        *,
+        __pydantic_extra__: Optional[Dict[str, Any]] = None,
+        __pydantic_fields_set__: Optional[Set[str]] = None,
+        __pydantic_private__: Optional[Dict[str, Any]] = None,
+        name: str = "",
+        **kwargs: Any
+    ) -> "OxylabsSearchResults":  # type: ignore[override]
         return self
 
     def _run(
