@@ -82,8 +82,7 @@ class OxylabsSearchResults(BaseTool):
         "The output is a JSON array of response page objects. "
     )
     args_schema: Optional[Type[BaseModel]] = cast(
-        Optional[Type[BaseModel]],
-        OxylabsSearchQueryInput
+        Optional[Type[BaseModel]], OxylabsSearchQueryInput
     )
 
     def _run(
