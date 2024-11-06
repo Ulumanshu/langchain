@@ -24,7 +24,7 @@ class OxylabsSearchQueryInput(BaseModel):
     )
 
 
-class OxylabsSearchRun(BaseTool):
+class OxylabsSearchRun(BaseTool):  # type: ignore[override, override]
     """Tool that queries a Oxylabs instance."""
 
     name: str = "oxylabs_search"
@@ -67,7 +67,7 @@ class OxylabsSearchRun(BaseTool):
         return await wrapper_.arun(query)
 
 
-class OxylabsSearchResults(BaseTool):
+class OxylabsSearchResults(BaseTool):  # type: ignore[override, override]
     """Tool that queries a Oxylabs instance and gets back json."""
 
     name: str = "oxylabs_search_results"
