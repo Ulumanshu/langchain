@@ -37,7 +37,7 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    args_schema: Type[BaseModel] = OxylabsSearchQueryInput # type: ignore[override]
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput  # type: ignore[override]
 
     def _run(
         self,
