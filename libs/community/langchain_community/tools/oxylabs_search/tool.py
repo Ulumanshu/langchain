@@ -40,12 +40,7 @@ class OxylabsSearchRun(BaseTool):
     args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
     return_direct: bool = False
 
-    def __replace__(
-            self,
-            *args: Any,
-            **kwargs: Any
-    ) -> "OxylabsSearchRun":  # type: ignore[override]
-
+    def __replace__(self, *args: Any, **kwargs: Any) -> "OxylabsSearchRun":  # type: ignore[override]
         return self
 
     def _run(
@@ -91,12 +86,7 @@ class OxylabsSearchResults(BaseTool):
     args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
     return_direct: bool = False
 
-    def __replace__(
-            self,
-            *args: Any,
-            **kwargs: Any
-    ) -> "OxylabsSearchResults":  # type: ignore[override]
-
+    def __replace__(self, *args: Any, **kwargs: Any) -> "OxylabsSearchResults":  # type: ignore[override]
         return self
 
     def _run(
