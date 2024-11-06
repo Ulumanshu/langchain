@@ -37,7 +37,7 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
+    args_schema: Type[OxylabsSearchQueryInput] = OxylabsSearchQueryInput
 
     def _run(
         self,
@@ -47,7 +47,8 @@ class OxylabsSearchRun(BaseTool):
     ) -> str:
         """Use the tool."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=parameters)
 
         return wrapper_.run(query)
 
@@ -59,7 +60,8 @@ class OxylabsSearchRun(BaseTool):
     ) -> str:
         """Use the tool asynchronously."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=parameters)
 
         return await wrapper_.arun(query)
 
@@ -77,7 +79,7 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
-    args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
+    args_schema: Type[OxylabsSearchQueryInput] = OxylabsSearchQueryInput
 
     def _run(
         self,
@@ -87,7 +89,8 @@ class OxylabsSearchResults(BaseTool):
     ) -> str:
         """Use the tool."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=parameters)
 
         return json.dumps(wrapper_.results(query))
 
@@ -99,6 +102,7 @@ class OxylabsSearchResults(BaseTool):
     ) -> str:
         """Use the tool asynchronously."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=parameters)
 
         return json.dumps(await wrapper_.aresults(query))
