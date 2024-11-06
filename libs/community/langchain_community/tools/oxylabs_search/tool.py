@@ -44,6 +44,11 @@ class OxylabsSearchRun(BaseTool):
         extra="allow",
     )
 
+    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs) -> None:
+        super().__init__()
+        self.wrapper = wrapper
+        self.kwargs = kwargs
+
     def _run(
         self,
         query: str,
@@ -99,6 +104,11 @@ class OxylabsSearchResults(BaseTool):
     model_config = ConfigDict(
         extra="allow",
     )
+
+    def __init__(self, wrapper: OxylabsSearchAPIWrapper, **kwargs) -> None:
+        super().__init__()
+        self.wrapper = wrapper
+        self.kwargs = kwargs
 
     def _run(
         self,
