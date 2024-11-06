@@ -96,7 +96,7 @@ class OxylabsSearchResults(BaseTool):
     ) -> str:
         """Use the tool."""
 
-        kwargs_= {"geo_location": geo_location}
+        kwargs_ = {"geo_location": geo_location}
         wrapper_ = OxylabsSearchAPIWrapper()
 
         return json.dumps(wrapper_.results(query, **kwargs_))
