@@ -236,7 +236,7 @@ class OxylabsSearchAPIWrapper(BaseModel):
 
         return validated_categories
 
-    async def arun(self, query) -> str:
+    async def arun(self, query: str) -> str:
         """
         Run query through OxylabsSearchAPI and parse result async.
         """
