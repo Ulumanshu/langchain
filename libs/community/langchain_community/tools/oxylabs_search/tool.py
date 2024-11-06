@@ -47,7 +47,7 @@ class OxylabsSearchRun(BaseTool):
         __pydantic_fields_set__: Optional[Set[str]] = None,
         __pydantic_private__: Optional[Dict[str, Any]] = None,
         name: str = "",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> "OxylabsSearchRun":  # type: ignore[override]
         return self
 
@@ -101,7 +101,7 @@ class OxylabsSearchResults(BaseTool):
         __pydantic_fields_set__: Optional[Set[str]] = None,
         __pydantic_private__: Optional[Dict[str, Any]] = None,
         name: str = "",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> "OxylabsSearchResults":  # type: ignore[override]
         return self
 
