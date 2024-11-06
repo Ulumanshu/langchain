@@ -1,7 +1,7 @@
 """Tool for the Oxylabs Search API."""
 
 import json
-from typing import Optional
+from typing import Optional, Type
 
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
@@ -37,26 +37,32 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
+    return_direct: bool = False
 
     def _run(
         self,
         query: str,
+        geo_location: str,
         run_manager: Optional[CallbackManagerForToolRun] = None,
     ) -> str:
         """Use the tool."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        search_api_parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=search_api_parameters)
 
         return wrapper_.run(query)
 
     async def _arun(
         self,
         query: str,
+        geo_location: str,
         run_manager: Optional[AsyncCallbackManagerForToolRun] = None,
     ) -> str:
         """Use the tool asynchronously."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        search_api_parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=search_api_parameters)
 
         return await wrapper_.arun(query)
 
@@ -74,25 +80,31 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
+    return_direct: bool = False
 
     def _run(
         self,
         query: str,
+        geo_location: str,
         run_manager: Optional[CallbackManagerForToolRun] = None,
     ) -> str:
         """Use the tool."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        search_api_parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=search_api_parameters)
 
         return json.dumps(wrapper_.results(query))
 
     async def _arun(
         self,
         query: str,
+        geo_location: str,
         run_manager: Optional[AsyncCallbackManagerForToolRun] = None,
     ) -> str:
         """Use the tool asynchronously."""
 
-        wrapper_ = OxylabsSearchAPIWrapper()
+        search_api_parameters = {"geo_location": geo_location}
+        wrapper_ = OxylabsSearchAPIWrapper(params=search_api_parameters)
 
         return json.dumps(await wrapper_.aresults(query))
