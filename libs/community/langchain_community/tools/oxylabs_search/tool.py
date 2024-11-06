@@ -1,7 +1,7 @@
 """Tool for the Oxylabs Search API."""
 
 import json
-from typing import Optional, Type, cast
+from typing import Optional
 
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
