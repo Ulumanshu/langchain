@@ -4,12 +4,11 @@ from langchain_community.tools.oxylabs_search import (
     OxylabsSearchResults,
     OxylabsSearchRun,
 )
-from langchain_community.utilities.oxylabs_search import OxylabsSearchAPIWrapper
 
 
 def test_oxylabs_search_call() -> None:
     """Test simple call to Oxylabs Search API."""
-    oxylabs_search_tool = OxylabsSearchRun(wrapper=OxylabsSearchAPIWrapper())
+    oxylabs_search_tool = OxylabsSearchRun()
 
     output = oxylabs_search_tool.invoke(
         {
@@ -29,7 +28,7 @@ def test_oxylabs_search_call() -> None:
 
 def test_oxylabs_search_results_call() -> None:
     """Test simple results call to Oxylabs Search API."""
-    oxylabs_search_tool = OxylabsSearchResults(wrapper=OxylabsSearchAPIWrapper())  # type: ignore[call-arg]
+    oxylabs_search_tool = OxylabsSearchResults()  # type: ignore[call-arg]
 
     output = oxylabs_search_tool.invoke(
         {
