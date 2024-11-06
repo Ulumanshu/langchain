@@ -1,7 +1,7 @@
 """Tool for the Oxylabs Search API."""
 
 import json
-from typing import Optional, Type
+from typing import Optional, Type, Union
 
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
@@ -37,7 +37,7 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
+    args_schema: Union[Type[BaseModel], None] = OxylabsSearchQueryInput
 
     def _run(
         self,
@@ -75,7 +75,7 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
-    args_schema: Type[BaseModel] = OxylabsSearchQueryInput
+    args_schema: Union[Type[BaseModel], None] = OxylabsSearchQueryInput
 
     def _run(
         self,
