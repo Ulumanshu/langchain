@@ -17,7 +17,7 @@ class OxylabsSearchQueryInput(BaseModel):
     """Input for the OxylabsSearch tool."""
 
     query: str = Field(description="query to retrieve on Oxylabs Search API")
-    geo_location: Optional[str] = Field(
+    geo_location: str = Field(
         default="California,United States",
         description="Geographic location for the search;"
         " adjust if location-specific information is requested.",
@@ -37,7 +37,7 @@ class OxylabsSearchRun(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a compiled, formatted summary of query results. "
     )
-    args_schema: Optional[Type[BaseModel]] = Field(default=OxylabsSearchQueryInput)
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput  # type: ignore
 
     def _run(
         self,
@@ -79,7 +79,7 @@ class OxylabsSearchResults(BaseTool):
         " a geo_location string to enhance result accuracy. "
         "The output is a JSON array of response page objects. "
     )
-    args_schema: Optional[Type[BaseModel]] = Field(default=OxylabsSearchQueryInput)
+    args_schema: Type[BaseModel] = OxylabsSearchQueryInput  # type: ignore
 
     def _run(
         self,
