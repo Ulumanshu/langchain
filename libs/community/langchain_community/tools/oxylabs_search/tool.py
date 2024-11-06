@@ -38,9 +38,6 @@ class OxylabsSearchRun(BaseTool):
         "The output is a compiled, formatted summary of query results. "
     )
     args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
-    model_config = ConfigDict(
-        extra="allow",
-    )
 
     def _run(
         self,
@@ -83,10 +80,6 @@ class OxylabsSearchResults(BaseTool):
         "The output is a JSON array of response page objects. "
     )
     args_schema: Optional[Type[BaseModel]] = OxylabsSearchQueryInput
-
-    model_config = ConfigDict(
-        extra="allow",
-    )
 
     def _run(
         self,
